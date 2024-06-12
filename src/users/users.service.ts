@@ -13,7 +13,7 @@ export class UsersService {
       async remove(id: number): Promise<void> {
         const user = await this.encontrar1(id)
         if(user) {
-          await this.UserssRepository.delete
+          await this.UserssRepository.delete(id)
         }
       }
       async get(): Promise<any> {
@@ -54,4 +54,13 @@ export class UsersService {
         throw new BadRequestException('No se a podido crear el registro del usuario', error)
       }
     }
+    async updateParcial(id,data):Promise<any> {
+      try {
+        await this.UserssRepository.update(id,data);
+      } catch (error) {
+        throw new BadRequestException("No se a podido actualizar parcialmente el registro" + id )
+      }
+
+  }  
+    
   }
